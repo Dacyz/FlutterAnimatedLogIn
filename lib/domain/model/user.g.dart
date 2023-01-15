@@ -17,15 +17,15 @@ class UserAdapter extends TypeAdapter<User> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return User(
-      image: fields[7] as String,
-      fecha: fields[8] as String,
-      lastname: fields[3] as String,
       id: fields[0] as int,
       dni: fields[1] as String,
       name: fields[2] as String,
+      lastname: fields[3] as String,
       email: fields[4] as String,
-      isActive: fields[6] as bool,
       pass: fields[5] as String,
+      isActive: fields[6] as bool,
+      image: fields[7] as String,
+      fecha: fields[8] as String,
     );
   }
 

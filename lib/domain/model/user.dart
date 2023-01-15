@@ -25,26 +25,27 @@ class User extends HiveObject with EquatableMixin {
   final String fecha;
 
   User({
-    required this.image,
-    required this.fecha,
-    required this.lastname,
     required this.id,
     required this.dni,
     required this.name,
+    required this.lastname,
     required this.email,
+    required this.pass,
     this.isActive = true,
-    this.pass = 'New User',
+    required this.image,
+    this.fecha = '',
   });
 
   dynamic toJson() => {
         'id': id,
         'dni': dni,
         'name': name,
+        'lastname': lastname,
         'email': email,
+        "pass": pass,
+        'isActive': isActive,
         'image': image,
         'fecha': fecha,
-        'isActive': isActive,
-        "customerType": pass,
       };
 
   @override
@@ -54,6 +55,6 @@ class User extends HiveObject with EquatableMixin {
 
   @override
   List<Object> get props {
-    return [name, dni, email, isActive, pass, image];
+    return [id, dni, name, lastname, email, pass, isActive, image, fecha];
   }
 }

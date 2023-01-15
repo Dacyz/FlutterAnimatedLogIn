@@ -4,11 +4,11 @@ import 'package:fractal_technical_interview/data/hive_data.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
 
 class RegisterValidation extends HiveData {
-
-  Future<void> registerUser(User user, GlobalKey<FormState> a, BuildContext context) async {
+  Future<void> registerUser(
+      User user, GlobalKey<FormState> a, BuildContext context) async {
     if (a.currentState!.validate()) {
       try {
-        User(
+        User newUser = User(
             fecha: '',
             image: user.image,
             lastname: user.lastname,
@@ -17,12 +17,12 @@ class RegisterValidation extends HiveData {
             name: user.name,
             email: user.email,
             pass: user.pass);
-        await saveUser(user);
+        await saveUser(newUser);
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("Registrado correctamente"), //75954108 Gatito
+          content: Text("Registrado correctamente"),
         ));
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(

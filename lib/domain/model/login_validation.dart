@@ -7,10 +7,7 @@ import 'package:collection/collection.dart';
 class LoginValidation with UserValidation {
   Future<User?> getUser(String dni) async {
     List<User?> usuarios = await const HiveData().users;
-    print(usuarios);
-    return usuarios.firstWhereOrNull(
-      (element) => element!.dni == dni,
-    );
+    return usuarios.firstWhereOrNull((element) => element!.dni == dni);
   }
 
   Future<bool> isUser(String dni) async {
