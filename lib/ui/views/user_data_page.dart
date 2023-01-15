@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/data/hive_data.dart';
-import 'package:fractal_technical_interview/domain/model/images_data.dart';
-import 'package:fractal_technical_interview/domain/model/user.dart';
+import 'package:fractal_technical_interview/resources/hive_data.dart';
+import 'package:fractal_technical_interview/blocs/images_data.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/presentation/components/animated_button.dart';
-import 'package:fractal_technical_interview/presentation/components/animated_row.dart';
-import 'package:fractal_technical_interview/presentation/components/card_container.dart';
-import 'package:fractal_technical_interview/presentation/components/hr.dart';
-import 'package:fractal_technical_interview/presentation/components/animated_avatar.dart';
-import 'package:fractal_technical_interview/presentation/views/login_page.dart';
+import 'package:fractal_technical_interview/models/user.dart';
+import 'package:fractal_technical_interview/ui/widgets/animated_button.dart';
+import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';
+import 'package:fractal_technical_interview/ui/widgets/card_container.dart';
+import 'package:fractal_technical_interview/ui/widgets/hr.dart';
+import 'package:fractal_technical_interview/ui/widgets/animated_avatar.dart';
+import 'package:fractal_technical_interview/ui/views/login_page.dart';
 
 class UserDataPage extends StatefulWidget {
   final User? user;
@@ -63,7 +63,9 @@ class _UserDataPageState extends State<UserDataPage> {
   }
 
   Future<void> getData() async {
-    usuarios = await hiveData.users;
+    usuarios = (await hiveData.users);
+    // ignore: list_remove_unrelated_type
+    usuarios.remove(widget.user);
   }
 
   @override
@@ -206,7 +208,7 @@ class _UserDataPageState extends State<UserDataPage> {
               ),
               Container(
                 margin: const EdgeInsets.all(20.0),
-                height: 200.0,
+                height: usuarios.isNotEmpty ? 200.0 : null,
                 child: usuarios.isNotEmpty
                     ? ListView.separated(
                         separatorBuilder: (_, __) => const SizedBox(
@@ -215,9 +217,6 @@ class _UserDataPageState extends State<UserDataPage> {
                         scrollDirection: Axis.horizontal,
                         itemCount: usuarios.length,
                         itemBuilder: (BuildContext context, int index) {
-                          if (usuarios[index].id == widget.user!.id) {
-                            return const SizedBox();
-                          }
                           return CardContainer(
                             user: usuarios[index],
                           );

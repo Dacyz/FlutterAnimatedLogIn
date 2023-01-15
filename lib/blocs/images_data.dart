@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:core';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/presentation/views/PhotosPrintPage.dart';
+import 'package:fractal_technical_interview/ui/views/PhotosPrintPage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;

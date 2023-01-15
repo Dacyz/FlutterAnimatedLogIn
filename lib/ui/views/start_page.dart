@@ -2,12 +2,12 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:fractal_technical_interview/data/SPreferences_data.dart';
-import 'package:fractal_technical_interview/domain/model/user.dart';
-import 'package:fractal_technical_interview/presentation/components/layout_page.dart';
-import 'package:fractal_technical_interview/presentation/views/profile_page.dart';
-import 'package:fractal_technical_interview/presentation/components/particle_generator.dart';
-import 'package:fractal_technical_interview/presentation/views/waiting_page.dart';
+import 'package:fractal_technical_interview/resources/SPreferences_data.dart';
+import 'package:fractal_technical_interview/models/user.dart';
+import 'package:fractal_technical_interview/ui/widgets/layout_page.dart';
+import 'package:fractal_technical_interview/ui/views/profile_page.dart';
+import 'package:fractal_technical_interview/ui/widgets/particle_generator.dart';
+import 'package:fractal_technical_interview/ui/views/waiting_page.dart';
 
 class StartPage extends StatefulWidget {
   final User? user;

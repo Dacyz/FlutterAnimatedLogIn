@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fractal_technical_interview/domain/model/user.dart';
-import 'package:fractal_technical_interview/presentation/views/init_page.dart';
+import 'package:fractal_technical_interview/models/user.dart';
+import 'package:fractal_technical_interview/ui/views/init_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 const mainBackupColor = Color.fromARGB(255, 0, 153, 38);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/domain/model/user.dart';
-import 'package:fractal_technical_interview/presentation/views/user_data_page.dart';
+import 'package:fractal_technical_interview/models/user.dart';
+import 'package:fractal_technical_interview/ui/views/user_data_page.dart';
 
 class ProfilePage extends AnimatedWidget {
   final User? user;
