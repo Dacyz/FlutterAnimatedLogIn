@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/blocs/images_data.dart';
 import 'package:fractal_technical_interview/blocs/register_validation.dart';
-import 'package:fractal_technical_interview/blocs/user_validation.dart';
+import 'package:fractal_technical_interview/models/user_validation.dart';
 import 'package:fractal_technical_interview/main.dart';
 import 'package:fractal_technical_interview/models/user.dart';
 import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';

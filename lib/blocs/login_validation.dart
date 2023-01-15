@@ -1,5 +1,5 @@
 import 'package:fractal_technical_interview/resources/hive_data.dart';
-import 'package:fractal_technical_interview/blocs/user_validation.dart';
+import 'package:fractal_technical_interview/models/user_validation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:fractal_technical_interview/models/user.dart';
