@@ -4,6 +4,7 @@ import 'package:fractal_technical_interview/domain/model/images_data.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
 import 'package:fractal_technical_interview/main.dart';
 import 'package:fractal_technical_interview/presentation/components/AnimatedRow.dart';
+import 'package:fractal_technical_interview/presentation/components/card_container.dart';
 import 'package:fractal_technical_interview/presentation/components/hr.dart';
 import 'package:fractal_technical_interview/presentation/components/image_container.dart';
 import 'package:fractal_technical_interview/presentation/views/login_page.dart';
@@ -151,7 +152,7 @@ class _UserDataPageState extends State<UserDataPage> {
                           },
                           icon: const Icon(Icons.camera_alt),
                         )
-                      : SizedBox(),
+                      : const SizedBox(),
                   !editable
                       ? IconButton(
                           onPressed: () async {
@@ -160,7 +161,7 @@ class _UserDataPageState extends State<UserDataPage> {
                           },
                           icon: const Icon(Icons.close),
                         )
-                      : SizedBox()
+                      : const SizedBox()
                 ],
               ),
               const hr(),
@@ -276,52 +277,6 @@ class _UserDataPageState extends State<UserDataPage> {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class CardContainer extends StatelessWidget {
-  final User user;
-  const CardContainer({
-    Key? key,
-    required this.user,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 2,
-              blurRadius: 5,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
-        width: 150,
-        height: 50,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              ImageContainer(imageSrc: user.image),
-              Text(
-                '${user.name} ${user.lastname}',
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Text('[${user.dni}]'),
-            ],
-          ),
         ),
       ),
     );
