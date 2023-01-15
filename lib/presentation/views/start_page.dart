@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:fractal_technical_interview/data/SPreferences_data.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
-import 'package:fractal_technical_interview/presentation/components/ContainerLayout.dart';
+import 'package:fractal_technical_interview/presentation/components/layout_page.dart';
 import 'package:fractal_technical_interview/presentation/views/profile_page.dart';
 import 'package:fractal_technical_interview/presentation/components/particle_generator.dart';
 import 'package:fractal_technical_interview/presentation/views/waiting_page.dart';
@@ -67,7 +67,7 @@ class _StartPageState extends State<StartPage>
 
   @override
   Widget build(BuildContext context) {
-    return ContainerLayout(
+    return LayoutPage(
       child: TweenAnimationBuilder(
         tween: Tween(begin: 0.0, end: 1.0),
         duration: const Duration(milliseconds: 500),
@@ -94,9 +94,9 @@ class _StartPageState extends State<StartPage>
               progressAnimation: _progressAnimation,
             ),
             ProfilePage(
-              user: widget.user,
-            resetUserProps: prefs.resetUserProps,
-            endingAnimation: _endingAnimation),
+                user: widget.user,
+                resetUserProps: prefs.resetUserProps,
+                endingAnimation: _endingAnimation),
           ],
         ),
       ),

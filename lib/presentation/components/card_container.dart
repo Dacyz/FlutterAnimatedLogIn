@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
-import 'package:fractal_technical_interview/presentation/components/AnimatedRow.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_row.dart';
 import 'package:fractal_technical_interview/presentation/components/hr.dart';
-import 'package:fractal_technical_interview/presentation/components/image_container.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_avatar.dart';
 
 class CardContainer extends StatelessWidget {
   final User user;
@@ -46,7 +46,7 @@ class CardContainer extends StatelessWidget {
                         fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                   const hr(),
-                  ImageContainer(imageSrc: user.image),
+                  AnimatedAvatar(imageSrc: user.image),
                   AnimatedRow(
                     title: 'DNI',
                     value: user.dni,
@@ -85,7 +85,7 @@ class CardContainer extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              ImageContainer(imageSrc: user.image),
+              AnimatedAvatar(imageSrc: user.image),
               Text(
                 '${user.name} ${user.lastname}',
                 textAlign: TextAlign.center,

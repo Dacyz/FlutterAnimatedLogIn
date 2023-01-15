@@ -4,10 +4,10 @@ import 'package:fractal_technical_interview/domain/model/register_validation.dar
 import 'package:fractal_technical_interview/domain/model/user.dart';
 import 'package:fractal_technical_interview/domain/interfaces/user_validation.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/presentation/components/AnimatedRow.dart';
-import 'package:fractal_technical_interview/presentation/components/ContainerLayout.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_row.dart';
+import 'package:fractal_technical_interview/presentation/components/layout_page.dart';
 import 'package:fractal_technical_interview/presentation/components/hr.dart';
-import 'package:fractal_technical_interview/presentation/components/image_container.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_avatar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -38,7 +38,7 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
 
   @override
   Widget build(BuildContext context) {
-    return ContainerLayout(
+    return LayoutPage(
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -65,7 +65,7 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                           setState(() {});
                         },
                       ),
-                      ImageContainer(imageSrc: imageFileController),
+                      AnimatedAvatar(imageSrc: imageFileController),
                       IconButton(
                         onPressed: () async {
                           imageFileController =

@@ -3,10 +3,10 @@ import 'package:fractal_technical_interview/data/SPreferences_data.dart';
 import 'package:fractal_technical_interview/domain/model/login_validation.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/presentation/components/ContainerLayout.dart';
+import 'package:fractal_technical_interview/presentation/components/layout_page.dart';
 import 'package:fractal_technical_interview/presentation/components/custom_textfield.dart';
 import 'package:fractal_technical_interview/presentation/components/hr.dart';
-import 'package:fractal_technical_interview/presentation/components/image_container.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_avatar.dart';
 import 'package:fractal_technical_interview/presentation/views/register_page.dart';
 import 'package:fractal_technical_interview/presentation/views/start_page.dart';
 
@@ -50,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return ContainerLayout(
+    return LayoutPage(
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          const ImageContainer(),
+                          const AnimatedAvatar(),
                           const hr(height: 24),
                           CustomTextField(
                               validator: (value) {

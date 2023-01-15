@@ -3,10 +3,10 @@ import 'package:fractal_technical_interview/data/hive_data.dart';
 import 'package:fractal_technical_interview/domain/model/images_data.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/presentation/components/AnimatedRow.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_row.dart';
 import 'package:fractal_technical_interview/presentation/components/card_container.dart';
 import 'package:fractal_technical_interview/presentation/components/hr.dart';
-import 'package:fractal_technical_interview/presentation/components/image_container.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_avatar.dart';
 import 'package:fractal_technical_interview/presentation/views/login_page.dart';
 
 class UserDataPage extends StatefulWidget {
@@ -142,7 +142,7 @@ class _UserDataPageState extends State<UserDataPage> {
                               borderRadius: BorderRadius.circular(100),
                             )
                           : const BoxDecoration(),
-                      child: ImageContainer(imageSrc: imageFileController)),
+                      child: AnimatedAvatar(imageSrc: imageFileController)),
                   !editable
                       ? IconButton(
                           onPressed: () async {

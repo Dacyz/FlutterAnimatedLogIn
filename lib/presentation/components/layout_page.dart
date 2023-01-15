@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/main.dart';
 
-class ContainerLayout extends StatelessWidget {
+class LayoutPage extends StatelessWidget {
   final child;
 
-  const ContainerLayout({super.key, this.child});
+  const LayoutPage({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {

@@ -2,10 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
-class ImageContainer extends StatelessWidget {
+class AnimatedAvatar extends StatelessWidget {
   final String? imageSrc;
 
-  const ImageContainer({
+  const AnimatedAvatar({
     Key? key,
     this.imageSrc,
   }) : super(key: key);
