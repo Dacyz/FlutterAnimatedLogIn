@@ -21,7 +21,9 @@ class _UserListState extends State<UserList> {
   List<User> usuarios = [];
   Future<void> getData() async {
     usuarios = (await hiveData.users);
-    usuarios.remove(widget.user);
+    if (widget.user != null) {
+      usuarios.remove(widget.user);
+    }
   }
 
   @override

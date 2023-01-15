@@ -7,8 +7,13 @@ class HiveData {
   const HiveData();
 
   Future<int> saveUser(User user) async {
-    final Box<User> box = await Hive.openBox<User>('users_box');
-    return box.add(user);
+    try {
+      final Box<User> box = await Hive.openBox<User>('users_box');
+      return box.add(user);
+    } catch (e) {
+      print(e);
+      return -1;
+    }
   }
 
   Future<int> getKey(String dni) async {
@@ -24,9 +29,15 @@ class HiveData {
     return usuarios.length;
   }
 
-  Future<void> putAt(int key, User user) async {
-    final Box<User> box = await Hive.openBox<User>('users_box');
-    return box.putAt(key, user);
+  Future<bool> putAt(int key, User user) async {
+    try {
+      final Box<User> box = await Hive.openBox<User>('users_box');
+      box.putAt(key, user);
+      return true;
+    } catch (e) {
+      print(e);
+      return false;
+    }
   }
 
   Future<List<User>> get users async {

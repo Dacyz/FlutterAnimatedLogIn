@@ -115,8 +115,9 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                   AnimatedRow(
                     title: 'Contraseña',
                     controller: typeTFieldController,
-                    validator: (value) =>
-                        isName(value) ? 'Contraseña con sintax incorrecta' : null,
+                    validator: (value) => isName(value)
+                        ? 'Contraseña con sintax incorrecta'
+                        : null,
                     isEditable: false,
                   ),
                   const hr(),
@@ -149,18 +150,20 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                     backgroundColor: mainBackupColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
-                onPressed: () => LoginValidation().registerUser(
-                    User(
-                        fecha: '',
-                        image: imageFileController,
-                        lastname: lastNameTFieldController.text,
-                        id: 0,
-                        dni: dniTFieldController.text,
-                        name: nameTFieldController.text,
-                        email: emailTFieldController.text,
-                        pass: typeTFieldController.text),
-                    _formKey,
-                    context),
+                onPressed: () async => await LoginValidation().registerUser(
+                        User(
+                            fecha: '',
+                            image: imageFileController,
+                            lastname: lastNameTFieldController.text,
+                            id: 0,
+                            dni: dniTFieldController.text,
+                            name: nameTFieldController.text,
+                            email: emailTFieldController.text,
+                            pass: typeTFieldController.text),
+                        _formKey,
+                        context)
+                    ? Navigator.pop(context)
+                    : Navigator.pop(context),
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: 8.0,

@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 mixin CatchError {
-  bool catchs(void Function() a,
+  Future<bool> catchs(Future<bool> Function() a,
       {required BuildContext context,
       required String onError,
-      required String onSuccess}) {
+      required String onSuccess}) async {
     try {
-      a;
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(onSuccess),
-      ));
-      return true;
+      if (await a.call()) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(onSuccess),
+        ));
+        return true;
+      }
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(onError),

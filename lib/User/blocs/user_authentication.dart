@@ -9,10 +9,10 @@ import 'package:fractal_technical_interview/User/resources/hive_data.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/start_page.dart';
 
 class LoginValidation extends HiveData with UserValidation, CatchError {
-  Future<void> registerUser(
+  Future<bool> registerUser(
       User user, GlobalKey<FormState> form, BuildContext context) async {
     if (form.currentState!.validate()) {
-      catchs(
+      return catchs(
         () async {
           User newUser = User(
               fecha: '',
@@ -23,15 +23,14 @@ class LoginValidation extends HiveData with UserValidation, CatchError {
               name: user.name,
               email: user.email,
               pass: user.pass);
-          await saveUser(newUser);
-          // ignore: use_build_context_synchronously
-          Navigator.pop(context);
+          return (await saveUser(newUser)) != -1;
         },
         context: context,
         onError: 'Ocurrio un error al Registrar',
         onSuccess: 'Registro satisfactorio',
       );
     }
+    return false;
   }
 
   Future<bool> updateUser(
@@ -39,7 +38,7 @@ class LoginValidation extends HiveData with UserValidation, CatchError {
     if (form.currentState!.validate()) {
       return catchs(
         () async {
-          await putAt(user.id ,user);
+          return await putAt(user.id, user);
         },
         context: context,
         onError: 'Ocurrio un error al actualizar datos',
@@ -49,12 +48,13 @@ class LoginValidation extends HiveData with UserValidation, CatchError {
     return false;
   }
 
-  Future<void> loginUser(String dni, String pass, bool keepSesion, GlobalKey<FormState> form, BuildContext context) async {
+  Future<void> loginUser(String dni, String pass, bool keepSesion,
+      GlobalKey<FormState> form, BuildContext context) async {
     if (form.currentState!.validate()) {
-      final User? userValidated = await LoginValidation()
-          .isValidateLogin(dni, pass);
-      final bool comprobation = await SPreferencesData().writeUserProps(
-          dni, pass, keepSesion);
+      final User? userValidated =
+          await LoginValidation().isValidateLogin(dni, pass);
+      final bool comprobation =
+          await SPreferencesData().writeUserProps(dni, pass, keepSesion);
       if (comprobation && userValidated != null) {
         // ignore: use_build_context_synchronously
         Navigator.push(
