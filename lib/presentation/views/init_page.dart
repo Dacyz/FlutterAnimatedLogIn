@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:fractal_technical_interview/data/SPreferences_data.dart';
 import 'package:fractal_technical_interview/domain/model/login_validation.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';

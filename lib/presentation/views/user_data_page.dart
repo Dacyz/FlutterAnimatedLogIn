@@ -3,6 +3,7 @@ import 'package:fractal_technical_interview/data/hive_data.dart';
 import 'package:fractal_technical_interview/domain/model/images_data.dart';
 import 'package:fractal_technical_interview/domain/model/user.dart';
 import 'package:fractal_technical_interview/main.dart';
+import 'package:fractal_technical_interview/presentation/components/animated_button.dart';
 import 'package:fractal_technical_interview/presentation/components/animated_row.dart';
 import 'package:fractal_technical_interview/presentation/components/card_container.dart';
 import 'package:fractal_technical_interview/presentation/components/hr.dart';
@@ -112,7 +113,7 @@ class _UserDataPageState extends State<UserDataPage> {
             children: [
               const hr(),
               const Text(
-                'Perfil de usuario',
+                'Perfil',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
               ),
@@ -121,15 +122,15 @@ class _UserDataPageState extends State<UserDataPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   !editable
-                      ? IconButton(
+                      ? AnimatedIconButton(
                           onPressed: () async {},
-                          icon: const Icon(Icons.file_copy),
+                          icon: Icons.file_copy,
                         )
                       : const SizedBox(),
                   !editable
-                      ? IconButton(
-                          icon: const Icon(Icons.photo),
-                          onPressed: () {},
+                      ? AnimatedIconButton(
+                          onPressed: () async {},
+                          icon: Icons.photo_camera_back_rounded,
                         )
                       : const SizedBox(),
                   Container(
@@ -144,31 +145,27 @@ class _UserDataPageState extends State<UserDataPage> {
                           : const BoxDecoration(),
                       child: AnimatedAvatar(imageSrc: imageFileController)),
                   !editable
-                      ? IconButton(
+                      ? AnimatedIconButton(
                           onPressed: () async {
                             imageFileController =
                                 await ImageData().savePhoto(context) ?? '';
                             setState(() {});
                           },
-                          icon: const Icon(Icons.camera_alt),
+                          direction: false,
+                          icon: Icons.camera_alt,
                         )
                       : const SizedBox(),
                   !editable
-                      ? IconButton(
+                      ? AnimatedIconButton(
                           onPressed: () async {
                             imageFileController = '';
                             setState(() {});
                           },
-                          icon: const Icon(Icons.close),
+                          direction: false,
+                          icon: Icons.close,
                         )
                       : const SizedBox()
                 ],
-              ),
-              const hr(),
-              const Text(
-                'Información',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               const hr(),
               AnimatedRow(
