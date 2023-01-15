@@ -1,5 +1,5 @@
 
-import 'package:fractal_technical_interview/models/user.dart';
+import 'package:fractal_technical_interview/User/models/user.dart';
 import 'package:hive_flutter/adapters.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';

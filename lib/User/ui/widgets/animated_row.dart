@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/ui/widgets/custom_textfield.dart';
-import 'package:fractal_technical_interview/ui/widgets/hr.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/custom_textfield.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
 
 class AnimatedRow extends StatefulWidget {
   final String title;

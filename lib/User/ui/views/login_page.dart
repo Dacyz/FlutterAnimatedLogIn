@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/resources/SPreferences_data.dart';
-import 'package:fractal_technical_interview/blocs/login_validation.dart';
+import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
+import 'package:fractal_technical_interview/User/models/user.dart';
+import 'package:fractal_technical_interview/User/resources/SPreferences_data.dart';
+import 'package:fractal_technical_interview/User/ui/views/register_page.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/start_page.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/custom_textfield.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/layout_page.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/models/user.dart';
-import 'package:fractal_technical_interview/ui/widgets/layout_page.dart';
-import 'package:fractal_technical_interview/ui/widgets/custom_textfield.dart';
-import 'package:fractal_technical_interview/ui/widgets/hr.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_avatar.dart';
-import 'package:fractal_technical_interview/ui/views/register_page.dart';
-import 'package:fractal_technical_interview/ui/views/start_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

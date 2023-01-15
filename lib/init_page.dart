@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/resources/SPreferences_data.dart';
-import 'package:fractal_technical_interview/blocs/login_validation.dart';
-import 'package:fractal_technical_interview/models/user.dart';
-import 'package:fractal_technical_interview/ui/views/login_page.dart';
-import 'package:fractal_technical_interview/ui/views/start_page.dart';
+import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
+import 'package:fractal_technical_interview/User/models/user.dart';
+import 'package:fractal_technical_interview/User/resources/SPreferences_data.dart';
+import 'package:fractal_technical_interview/User/ui/views/login_page.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/start_page.dart';
 
 class InitPage extends StatelessWidget {
   InitPage({super.key});

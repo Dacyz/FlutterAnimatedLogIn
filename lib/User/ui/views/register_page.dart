@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/blocs/images_data.dart';
-import 'package:fractal_technical_interview/blocs/register_validation.dart';
-import 'package:fractal_technical_interview/models/user_validation.dart';
+import 'package:fractal_technical_interview/User/blocs/images_data.dart';
+import 'package:fractal_technical_interview/User/blocs/register_validation.dart';
+import 'package:fractal_technical_interview/User/models/user.dart';
+import 'package:fractal_technical_interview/User/models/user_validation.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/layout_page.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/models/user.dart';
 import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';
-import 'package:fractal_technical_interview/ui/widgets/layout_page.dart';
-import 'package:fractal_technical_interview/ui/widgets/hr.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_avatar.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

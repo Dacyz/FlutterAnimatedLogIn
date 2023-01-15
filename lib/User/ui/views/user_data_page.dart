@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/resources/hive_data.dart';
-import 'package:fractal_technical_interview/blocs/images_data.dart';
+import 'package:fractal_technical_interview/User/blocs/images_data.dart';
+import 'package:fractal_technical_interview/User/models/user.dart';
+import 'package:fractal_technical_interview/User/resources/hive_data.dart';
+import 'package:fractal_technical_interview/User/ui/views/login_page.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_button.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/models/user.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_button.dart';
 import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';
 import 'package:fractal_technical_interview/ui/widgets/card_container.dart';
-import 'package:fractal_technical_interview/ui/widgets/hr.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_avatar.dart';
-import 'package:fractal_technical_interview/ui/views/login_page.dart';
 
 class UserDataPage extends StatefulWidget {
   final User? user;

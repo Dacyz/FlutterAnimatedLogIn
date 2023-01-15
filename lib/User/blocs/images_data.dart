@@ -1,8 +1,7 @@
 import 'dart:io';
 import 'dart:core';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fractal_technical_interview/ui/views/PhotosPrintPage.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/PhotosPrintPage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
@@ -10,13 +9,12 @@ import 'package:path/path.dart' as path;
 class ImageData {
   Future<String?> savePhoto(BuildContext context) async {
     String? paths = await Navigator.push(
-        context, MaterialPageRoute(builder: (context) => PhotosPrintPage()));
+        context, MaterialPageRoute(builder: (context) => const PhotosPrintPage()));
     if (paths == null) return null;
     return saveFile(XFile(paths));
   }
 
   Future<bool> saveImage(BuildContext context) async {
-    //
     return false;
   }
 
@@ -29,6 +27,6 @@ class ImageData {
       return file.path;
     } catch (e) {
       return null;
-    } //   /data/user/0/com.example.fractal_technical_interview/app_flutter/CAP3615960538105341175.jpg
+    }
   }
 }

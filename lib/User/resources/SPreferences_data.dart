@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SPreferencesData {

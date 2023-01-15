@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fractal_technical_interview/resources/hive_data.dart';
-import 'package:fractal_technical_interview/models/user.dart';
+import 'package:fractal_technical_interview/User/models/user.dart';
+import 'package:fractal_technical_interview/User/resources/hive_data.dart';
 
 class RegisterValidation extends HiveData {
   Future<void> registerUser(
