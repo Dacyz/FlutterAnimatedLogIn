@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/blocs/images_data.dart';
-import 'package:fractal_technical_interview/User/blocs/register_validation.dart';
+import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
 import 'package:fractal_technical_interview/User/models/user.dart';
 import 'package:fractal_technical_interview/User/models/user_validation.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_row.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/layout_page.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -113,10 +113,10 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                     isEditable: false,
                   ),
                   AnimatedRow(
-                    title: 'Cargo',
+                    title: 'Contraseña',
                     controller: typeTFieldController,
                     validator: (value) =>
-                        isName(value) ? 'Cargo con sintax incorrecta' : null,
+                        isName(value) ? 'Contraseña con sintax incorrecta' : null,
                     isEditable: false,
                   ),
                   const hr(),
@@ -149,7 +149,7 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                     backgroundColor: mainBackupColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
-                onPressed: () => RegisterValidation().registerUser(
+                onPressed: () => LoginValidation().registerUser(
                     User(
                         fecha: '',
                         image: imageFileController,

@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
-import 'package:fractal_technical_interview/User/models/user.dart';
-import 'package:fractal_technical_interview/User/resources/SPreferences_data.dart';
 import 'package:fractal_technical_interview/User/ui/views/register_page.dart';
-import 'package:fractal_technical_interview/User/ui/widgets/start_page.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/custom_textfield.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
@@ -22,31 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passTFController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
-  SPreferencesData prefs = SPreferencesData();
-
-  Future<void> _saveUserProps() async {
-    if (_formKey.currentState!.validate()) {
-      final User? userValidated = await LoginValidation()
-          .isValidateLogin(dniTFController.text, passTFController.text);
-      final bool comprobation = await prefs.writeUserProps(
-          dniTFController.text, passTFController.text, _keepSesion);
-      if (comprobation && userValidated != null) {
-        // ignore: use_build_context_synchronously
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => StartPage(user: userValidated)));
-      } else {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('El usuario o contraseña incorrectos'),
-        ));
-      }
-
-      _formKey.currentState!.reset();
-    }
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +161,12 @@ class _LoginPageState extends State<LoginPage> {
                             backgroundColor: mainBackupColor,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        onPressed: _saveUserProps,
+                        onPressed: () => LoginValidation().loginUser(
+                            dniTFController.text,
+                            passTFController.text,
+                            _keepSesion,
+                            _formKey,
+                            context),
                         child: Padding(
                           padding: EdgeInsets.symmetric(
                               vertical: 8.0,

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/blocs/images_data.dart';
+import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
 import 'package:fractal_technical_interview/User/models/user.dart';
-import 'package:fractal_technical_interview/User/resources/hive_data.dart';
+import 'package:fractal_technical_interview/User/models/user_validation.dart';
 import 'package:fractal_technical_interview/User/ui/views/login_page.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/animated_button.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_row.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/list_user_container.dart';
 import 'package:fractal_technical_interview/main.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';
-import 'package:fractal_technical_interview/ui/widgets/card_container.dart';
 
 class UserDataPage extends StatefulWidget {
   final User? user;
@@ -23,15 +24,15 @@ class UserDataPage extends StatefulWidget {
   State<UserDataPage> createState() => _UserDataPageState();
 }
 
-class _UserDataPageState extends State<UserDataPage> {
-  final HiveData hiveData = const HiveData();
+class _UserDataPageState extends State<UserDataPage> with UserValidation {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   TextEditingController nameTFieldController = TextEditingController();
   TextEditingController lastNameTFieldController = TextEditingController();
   TextEditingController dniTFieldController = TextEditingController();
   TextEditingController emailTFieldController = TextEditingController();
   TextEditingController passTFieldController = TextEditingController();
   String imageFileController = '';
-
   String name = '';
   String lastname = '';
   String dni = '';
@@ -39,8 +40,16 @@ class _UserDataPageState extends State<UserDataPage> {
   String pass = '';
   String image = '';
 
-  List<User> usuarios = [];
   bool editable = false;
+  void initData() {
+    name = widget.user!.name;
+    lastname = widget.user!.lastname;
+    dni = widget.user!.dni;
+    email = widget.user!.email;
+    pass = widget.user!.pass;
+    image = widget.user!.image;
+    imageFileController = widget.user!.image;
+  }
 
   @override
   void dispose() {
@@ -52,53 +61,27 @@ class _UserDataPageState extends State<UserDataPage> {
     super.dispose();
   }
 
-  void initData() {
-    name = widget.user!.name;
-    lastname = widget.user!.lastname;
-    dni = widget.user!.dni;
-    email = widget.user!.email;
-    pass = widget.user!.pass;
-    image = widget.user!.image;
-    imageFileController = widget.user!.image;
-  }
-
-  Future<void> getData() async {
-    usuarios = (await hiveData.users);
-    // ignore: list_remove_unrelated_type
-    usuarios.remove(widget.user);
-  }
-
   @override
   void initState() {
-    getData();
     initData();
     super.initState();
   }
 
-  void _changeEditable() async {
+  void _changeEditable(
+    BuildContext context,
+    GlobalKey<FormState> form,
+    User user,
+  ) async {
     if (!editable) {
       if (imageFileController != '') {
-        await hiveData.updateUser(
-            widget.user!.id,
-            User(
-                fecha: '',
-                image: imageFileController,
-                lastname: lastNameTFieldController.text,
-                id: widget.user!.id,
-                dni: dniTFieldController.text,
-                name: nameTFieldController.text,
-                email: emailTFieldController.text,
-                pass: passTFieldController.text));
-        name = nameTFieldController.text;
-        dni = dniTFieldController.text;
-        email = emailTFieldController.text;
-        lastname = lastNameTFieldController.text;
-        pass = passTFieldController.text;
-        image = imageFileController;
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Editado correctamente'),
-        ));
+        if (await LoginValidation().updateUser(user, form, context)) {
+          name = nameTFieldController.text;
+          dni = dniTFieldController.text;
+          email = emailTFieldController.text;
+          lastname = lastNameTFieldController.text;
+          pass = passTFieldController.text;
+          image = imageFileController;
+        }
       }
     }
     editable = !editable;
@@ -110,122 +93,119 @@ class _UserDataPageState extends State<UserDataPage> {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const hr(),
-              const Text(
-                'Perfil',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
-              ),
-              const hr(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  !editable
-                      ? AnimatedIconButton(
-                          onPressed: () async {},
-                          icon: Icons.file_copy,
-                        )
-                      : const SizedBox(),
-                  !editable
-                      ? AnimatedIconButton(
-                          onPressed: () async {},
-                          icon: Icons.photo_camera_back_rounded,
-                        )
-                      : const SizedBox(),
-                  Container(
-                      decoration: image != imageFileController
-                          ? BoxDecoration(
-                              border: Border.all(
-                                color: Colors.green,
-                                width: 5,
-                              ),
-                              borderRadius: BorderRadius.circular(100),
-                            )
-                          : const BoxDecoration(),
-                      child: AnimatedAvatar(imageSrc: imageFileController)),
-                  !editable
-                      ? AnimatedIconButton(
-                          onPressed: () async {
-                            imageFileController =
-                                await ImageData().savePhoto(context) ?? '';
-                            setState(() {});
-                          },
-                          direction: false,
-                          icon: Icons.camera_alt,
-                        )
-                      : const SizedBox(),
-                  !editable
-                      ? AnimatedIconButton(
-                          onPressed: () async {
-                            imageFileController = '';
-                            setState(() {});
-                          },
-                          direction: false,
-                          icon: Icons.close,
-                        )
-                      : const SizedBox()
-                ],
-              ),
-              const hr(),
-              AnimatedRow(
-                title: 'Nombre',
-                value: name,
-                controller: nameTFieldController,
-                isEditable: editable,
-              ),
-              AnimatedRow(
-                title: 'Apellidos',
-                value: lastname,
-                controller: lastNameTFieldController,
-                isEditable: editable,
-              ),
-              AnimatedRow(
-                title: 'DNI',
-                value: dni,
-                controller: dniTFieldController,
-                isEditable: editable,
-              ),
-              AnimatedRow(
-                title: 'Correo',
-                value: email,
-                controller: emailTFieldController,
-                isEditable: editable,
-              ),
-              AnimatedRow(
-                title: 'Contraseña',
-                value: pass,
-                controller: passTFieldController,
-                isEditable: editable,
-              ),
-              const hr(),
-              const Text(
-                'Otros usuarios',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              Container(
-                margin: const EdgeInsets.all(20.0),
-                height: usuarios.isNotEmpty ? 200.0 : null,
-                child: usuarios.isNotEmpty
-                    ? ListView.separated(
-                        separatorBuilder: (_, __) => const SizedBox(
-                          width: 10,
-                        ),
-                        scrollDirection: Axis.horizontal,
-                        itemCount: usuarios.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CardContainer(
-                            user: usuarios[index],
-                          );
-                        },
-                      )
-                    : const Center(
-                        child: Text('No hay más usuarios registrados')),
-              ),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const hr(),
+                const Text(
+                  'Perfil',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                ),
+                const hr(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    !editable
+                        ? AnimatedIconButton(
+                            onPressed: () async {},
+                            icon: Icons.file_copy,
+                          )
+                        : const SizedBox(),
+                    !editable
+                        ? AnimatedIconButton(
+                            onPressed: () async {},
+                            icon: Icons.photo_camera_back_rounded,
+                          )
+                        : const SizedBox(),
+                    Container(
+                        decoration: image != imageFileController
+                            ? BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.green,
+                                  width: 5,
+                                ),
+                                borderRadius: BorderRadius.circular(100),
+                              )
+                            : const BoxDecoration(),
+                        child: AnimatedAvatar(imageSrc: imageFileController)),
+                    !editable
+                        ? AnimatedIconButton(
+                            onPressed: () async {
+                              imageFileController =
+                                  await ImageData().savePhoto(context) ?? '';
+                              setState(() {});
+                            },
+                            direction: false,
+                            icon: Icons.camera_alt,
+                          )
+                        : const SizedBox(),
+                    !editable
+                        ? AnimatedIconButton(
+                            onPressed: () async {
+                              imageFileController = '';
+                              setState(() {});
+                            },
+                            direction: false,
+                            icon: Icons.close,
+                          )
+                        : const SizedBox()
+                  ],
+                ),
+                const hr(),
+                AnimatedRow(
+                  title: 'Nombre',
+                  value: name,
+                  validator: (value) =>
+                      isName(value) ? 'Nombre con sintax incorrecta' : null,
+                  controller: nameTFieldController,
+                  isEditable: editable,
+                ),
+                AnimatedRow(
+                  title: 'Apellidos',
+                  value: lastname,
+                  validator: (value) =>
+                      isName(value) ? 'Apellidos con sintax incorrecta' : null,
+                  controller: lastNameTFieldController,
+                  isEditable: editable,
+                ),
+                AnimatedRow(
+                  title: 'DNI',
+                  value: dni,
+                  validator: (value) =>
+                      isDNI(value) ? 'DNI con sintax incorrecta' : null,
+                  controller: dniTFieldController,
+                  isEditable: editable,
+                ),
+                AnimatedRow(
+                  title: 'Correo',
+                  value: email,
+                  validator: (value) =>
+                      isEmail(value) ? 'Correo con sintax incorrecta' : null,
+                  controller: emailTFieldController,
+                  isEditable: editable,
+                ),
+                AnimatedRow(
+                  title: 'Contraseña',
+                  value: pass,
+                  validator: (value) =>
+                      isName(value) ? 'Contraseña con sintax incorrecta' : null,
+                  controller: passTFieldController,
+                  isEditable: editable,
+                ),
+                const hr(),
+                const Text(
+                  'Otros usuarios',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                UserList(
+                  user: widget.user,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -259,7 +239,18 @@ class _UserDataPageState extends State<UserDataPage> {
                   backgroundColor: mainBackupColor,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10))),
-              onPressed: _changeEditable,
+              onPressed: () => _changeEditable(
+                  context,
+                  _formKey,
+                  User(
+                      fecha: '',
+                      image: imageFileController,
+                      lastname: lastNameTFieldController.text,
+                      id: widget.user!.id,
+                      dni: dniTFieldController.text,
+                      name: nameTFieldController.text,
+                      email: emailTFieldController.text,
+                      pass: passTFieldController.text)),
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: 8.0,

@@ -1,4 +1,3 @@
-
 import 'package:fractal_technical_interview/User/models/user.dart';
 import 'package:hive_flutter/adapters.dart';
 // ignore: depend_on_referenced_packages
@@ -25,7 +24,7 @@ class HiveData {
     return usuarios.length;
   }
 
-  Future<void> updateUser(int key, User user) async {
+  Future<void> putAt(int key, User user) async {
     final Box<User> box = await Hive.openBox<User>('users_box');
     return box.putAt(key, user);
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/models/user.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
+import 'package:fractal_technical_interview/User/ui/widgets/animated_row.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/hr.dart';
-import 'package:fractal_technical_interview/ui/widgets/animated_row.dart';
 
 class CardContainer extends StatelessWidget {
   final User user;
