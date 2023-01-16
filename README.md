@@ -35,4 +35,9 @@ Proyecto realizado en 4 dias con 6 horas de trabajo que usa **Hive** para el alm
        hive_generator:
        build_runner:
        
-       
+#### Pending issues:
+ - Usuario con campos no usados: isActivated, Fecha
+ - Animaciones de registro inexistentes.
+ - Usar un State Management.
+ - Usar Provider.
+ - y más. (Justo me ha salido un orzuelo para el proyecto :.v)
