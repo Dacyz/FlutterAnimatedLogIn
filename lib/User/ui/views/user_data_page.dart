@@ -41,7 +41,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
   String pass = '';
   String image = '';
 
-  bool editable = false;
+  bool isntEditable = true;
   void initData() {
     name = widget.user!.name;
     lastname = widget.user!.lastname;
@@ -73,7 +73,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
     GlobalKey<FormState> form,
     User user,
   ) async {
-    if (!editable) {
+    if (!isntEditable) {
       if (imageFileController != '') {
         if (await LoginValidation().updateUser(user, form, context)) {
           name = nameTFieldController.text;
@@ -85,7 +85,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
         }
       }
     }
-    editable = !editable;
+    isntEditable = !isntEditable;
     setState(() {});
   }
 
@@ -106,7 +106,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 const hr(),
-                !editable
+                !isntEditable
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -174,7 +174,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   validator: (value) =>
                       isName(value) ? 'Nombre con sintax incorrecta' : null,
                   controller: nameTFieldController,
-                  isEditable: editable,
+                  isEditable: isntEditable,
                 ),
                 AnimatedRow(
                   title: 'Apellidos',
@@ -182,7 +182,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   validator: (value) =>
                       isName(value) ? 'Apellidos con sintax incorrecta' : null,
                   controller: lastNameTFieldController,
-                  isEditable: editable,
+                  isEditable: isntEditable,
                 ),
                 AnimatedRow(
                   title: 'DNI',
@@ -190,7 +190,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   validator: (value) =>
                       isDNI(value) ? 'DNI con sintax incorrecta' : null,
                   controller: dniTFieldController,
-                  isEditable: editable,
+                  isEditable: isntEditable,
                 ),
                 AnimatedRow(
                   title: 'Correo',
@@ -198,7 +198,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   validator: (value) =>
                       isEmail(value) ? 'Correo con sintax incorrecta' : null,
                   controller: emailTFieldController,
-                  isEditable: editable,
+                  isEditable: isntEditable,
                 ),
                 AnimatedRow(
                   title: 'Contraseña',
@@ -206,7 +206,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   validator: (value) =>
                       isName(value) ? 'Contraseña con sintax incorrecta' : null,
                   controller: passTFieldController,
-                  isEditable: editable,
+                  isEditable: isntEditable,
                 ),
                 const hr(),
                 const Text(
@@ -229,14 +229,14 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
           children: [
             OutlinedButton(
                 onPressed: () {
-                  if (editable) {
+                  if (isntEditable) {
                     widget.resetUserProps();
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const LoginPage()));
                   } else {
-                    editable = true;
+                    isntEditable = true;
                     initData();
                     setState(() {});
                   }
@@ -249,7 +249,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                       vertical: 8.0,
                       horizontal: MediaQuery.of(context).size.width * 0.1),
                   child: Text(
-                    editable ? 'Salir' : 'Cancelar',
+                    isntEditable ? 'Salir' : 'Cancelar',
                     style: TextStyle(color: mainBackupColor),
                   ),
                 )),
@@ -275,7 +275,7 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                     vertical: 8.0,
                     horizontal: MediaQuery.of(context).size.width * 0.15),
                 child: Text(
-                  editable ? 'Editar' : 'Guardar',
+                  isntEditable ? 'Editar' : 'Guardar',
                   style: const TextStyle(
                     color: Colors.white,
                   ),
