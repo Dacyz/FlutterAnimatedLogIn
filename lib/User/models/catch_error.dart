@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 mixin CatchError {
+  ///
+  /// Clase por aburrimiento :v
+  /// 
+
   Future<bool> catchs(Future<bool> Function() a,
       {required BuildContext context,
       required String onError,

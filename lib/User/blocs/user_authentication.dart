@@ -4,11 +4,20 @@ import 'package:fractal_technical_interview/User/models/user.dart';
 import 'package:fractal_technical_interview/User/models/user_validation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
-import 'package:fractal_technical_interview/User/resources/SPreferences_data.dart';
+import 'package:fractal_technical_interview/User/resources/spreferences_data.dart';
 import 'package:fractal_technical_interview/User/resources/hive_data.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/start_page.dart';
 
 class LoginValidation extends HiveData with UserValidation, CatchError {
+  ///
+  /// Clase para la authentificación del usuario:
+  ///
+  /// Uses cases:
+  /// - Registro de usuario.
+  /// - Actualización de datos del usuario.
+  /// - Inicio de Sesión del usuario.
+  ///
+
   Future<bool> registerUser(
       User user, GlobalKey<FormState> form, BuildContext context) async {
     if (form.currentState!.validate()) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
+import 'package:fractal_technical_interview/User/models/user_validation.dart';
 import 'package:fractal_technical_interview/User/ui/views/register_page.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/animated_avatar.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/custom_textfield.dart';
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage> with UserValidation {
   bool _keepSesion = false;
   TextEditingController dniTFController = TextEditingController();
   TextEditingController passTFController = TextEditingController();
@@ -60,12 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                           const AnimatedAvatar(),
                           const hr(height: 24),
                           CustomTextField(
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Ingresa tu nombre de usuario';
-                                }
-                                return null;
-                              },
+                              validator: (value) => isDNI(value)
+                                  ? 'DNI con sintax incorrecta'
+                                  : null,
                               controller: dniTFController,
                               icon: Icons.person,
                               hint: 'DNI'),

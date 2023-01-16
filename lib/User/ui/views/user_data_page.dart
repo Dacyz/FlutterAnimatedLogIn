@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fractal_technical_interview/User/blocs/images_data.dart';
 import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
 import 'package:fractal_technical_interview/User/models/user.dart';
@@ -105,45 +106,57 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                 ),
                 const hr(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    !editable
-                        ? AnimatedIconButton(
-                            onPressed: () async {},
-                            icon: Icons.file_copy,
-                          )
-                        : const SizedBox(),
-                    !editable
-                        ? AnimatedIconButton(
-                            onPressed: () async {},
-                            icon: Icons.photo_camera_back_rounded,
-                          )
-                        : const SizedBox(),
-                    Container(
-                        decoration: image != imageFileController
-                            ? BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.green,
-                                  width: 5,
-                                ),
-                                borderRadius: BorderRadius.circular(100),
-                              )
-                            : const BoxDecoration(),
-                        child: AnimatedAvatar(imageSrc: imageFileController)),
-                    !editable
-                        ? AnimatedIconButton(
+                !editable
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          AnimatedIconButton(
                             onPressed: () async {
-                              imageFileController =
-                                  await ImageData().savePhoto(context) ?? '';
+                              Clipboard.setData(
+                                  ClipboardData(text: widget.user.toString()));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Usuario copiado al Clipboard'),
+                              ));
+                            },
+                            icon: Icons.file_copy,
+                          ),
+                          AnimatedIconButton(
+                            onPressed: () async {
+                              String? image =
+                                  await ImageData().saveImage(context);
+                              if (image != null) {
+                                imageFileController = image;
+                              }
+                              setState(() {});
+                            },
+                            icon: Icons.photo_camera_back_rounded,
+                          ),
+                          Container(
+                              decoration: image != imageFileController
+                                  ? BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.green,
+                                        width: 5,
+                                      ),
+                                      borderRadius: BorderRadius.circular(100),
+                                    )
+                                  : const BoxDecoration(),
+                              child: AnimatedAvatar(
+                                  imageSrc: imageFileController)),
+                          AnimatedIconButton(
+                            onPressed: () async {
+                              String? image =
+                                  await ImageData().savePhoto(context);
+                              if (image != null) {
+                                imageFileController = image;
+                              }
                               setState(() {});
                             },
                             direction: false,
                             icon: Icons.camera_alt,
-                          )
-                        : const SizedBox(),
-                    !editable
-                        ? AnimatedIconButton(
+                          ),
+                          AnimatedIconButton(
                             onPressed: () async {
                               imageFileController = '';
                               setState(() {});
@@ -151,9 +164,9 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                             direction: false,
                             icon: Icons.close,
                           )
-                        : const SizedBox()
-                  ],
-                ),
+                        ],
+                      )
+                    : AnimatedAvatar(imageSrc: image),
                 const hr(),
                 AnimatedRow(
                   title: 'Nombre',
@@ -216,11 +229,17 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
           children: [
             OutlinedButton(
                 onPressed: () {
-                  widget.resetUserProps();
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const LoginPage()));
+                  if (editable) {
+                    widget.resetUserProps();
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginPage()));
+                  } else {
+                    editable = true;
+                    initData();
+                    setState(() {});
+                  }
                 },
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
@@ -229,8 +248,8 @@ class _UserDataPageState extends State<UserDataPage> with UserValidation {
                   padding: EdgeInsets.symmetric(
                       vertical: 8.0,
                       horizontal: MediaQuery.of(context).size.width * 0.1),
-                  child: const Text(
-                    'Salir',
+                  child: Text(
+                    editable ? 'Salir' : 'Cancelar',
                     style: TextStyle(color: mainBackupColor),
                   ),
                 )),

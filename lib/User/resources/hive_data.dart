@@ -42,6 +42,7 @@ class HiveData {
 
   Future<List<User>> get users async {
     final Box<User> box = await Hive.openBox<User>('users_box');
+    print(box.values.toList());
     return box.values.toList();
   }
 }

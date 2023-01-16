@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/blocs/user_authentication.dart';
 import 'package:fractal_technical_interview/User/models/user.dart';
-import 'package:fractal_technical_interview/User/resources/SPreferences_data.dart';
+import 'package:fractal_technical_interview/User/resources/spreferences_data.dart';
 import 'package:fractal_technical_interview/User/ui/views/login_page.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/start_page.dart';
 

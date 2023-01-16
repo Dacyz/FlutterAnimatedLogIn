@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fractal_technical_interview/User/models/user.dart';
-import 'package:fractal_technical_interview/User/resources/SPreferences_data.dart';
+import 'package:fractal_technical_interview/User/resources/spreferences_data.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/profile_page.dart';
 import 'package:fractal_technical_interview/User/ui/views/waiting_page.dart';
 import 'package:fractal_technical_interview/User/ui/widgets/layout_page.dart';

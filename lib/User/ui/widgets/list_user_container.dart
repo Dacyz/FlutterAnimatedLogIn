@@ -36,21 +36,20 @@ class _UserListState extends State<UserList> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(20.0),
-      height: usuarios.isNotEmpty ? 200.0 : null,
-      child: usuarios.isNotEmpty
-          ? ListView.separated(
-              separatorBuilder: (_, __) => const SizedBox(
-                width: 10,
-              ),
-              scrollDirection: Axis.horizontal,
-              itemCount: usuarios.length,
-              itemBuilder: (BuildContext context, int index) {
-                return CardContainer(
-                  user: usuarios[index],
-                );
-              },
-            )
-          : const Center(child: Text('No hay más usuarios registrados')),
+      height: usuarios.isNotEmpty ? 220.0 : null,
+      child: Center(
+        child: usuarios.isNotEmpty
+            ? ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: usuarios.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CardContainer(
+                    user: usuarios[index],
+                  );
+                },
+              )
+            : const Text('No hay más usuarios registrados'),
+      ),
     );
   }
 }

@@ -60,8 +60,9 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                     children: [
                       IconButton(
                         icon: const Icon(Icons.photo),
-                        onPressed: () {
-                          ImageData().saveImage(context);
+                        onPressed: () async {
+                          imageFileController =
+                              await ImageData().saveImage(context) ?? '';
                           setState(() {});
                         },
                       ),
@@ -115,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                   AnimatedRow(
                     title: 'Contraseña',
                     controller: typeTFieldController,
-                    validator: (value) => isName(value)
+                    validator: (value) => isPassword(value)
                         ? 'Contraseña con sintax incorrecta'
                         : null,
                     isEditable: false,
@@ -163,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> with UserValidation {
                         _formKey,
                         context)
                     ? Navigator.pop(context)
-                    : Navigator.pop(context),
+                    : '',
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: 8.0,
