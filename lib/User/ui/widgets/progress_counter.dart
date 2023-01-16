@@ -12,7 +12,7 @@ class ProgressCounter extends AnimatedWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
-            value > 0.5 ? 'Validando datos ...' : 'Validando registros ...',
+            value > 0.5 ? 'Recopilando datos ...' : 'Validando registro ...',
             textAlign: TextAlign.center,
             style: const TextStyle(
               fontWeight: FontWeight.w400,
